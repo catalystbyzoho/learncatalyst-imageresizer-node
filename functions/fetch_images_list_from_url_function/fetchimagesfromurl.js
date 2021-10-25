@@ -41,7 +41,9 @@ async function deletePreviousEntries(catalystApp) {
     for (const row of rows) {
         ROWID.push(row.ImagefileDetails.ROWID)
     }
-    await table.deleteRows(ROWID);
+    if (ROWID.length > 0) {
+        await table.deleteRows(ROWID);
+    }
 }
 
 module.exports = async (context, _basicIO) => {

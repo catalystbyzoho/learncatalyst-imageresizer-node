@@ -3,8 +3,10 @@ function triggerCircuit() {
         url: "/server/render_resized_images_function/triggerCircuit",
         type: "post",
         success: function (data) {
-            console.log(data)
-            alert('Started Image Processing');
+            document.getElementById('right_part').style.visibility = "hidden";
+            document.getElementById('left_part').style.visibility = "hidden";
+            localStorage['circuitId'] = data.id;
+            document.getElementById('status').innerHTML = "Image Moderation Process Initiated";
         },
         error: function (error) {
             console.log(error);
@@ -14,24 +16,26 @@ function triggerCircuit() {
 }
 
 function getImages() {
-
-    document.getElementById('right_part').style.visibility = "visible";
-    document.getElementById('left_part').style.visibility = "visible";
+    document.getElementById('status').innerHTML = "";
+    document.getElementById('message').innerHTML = "Loading ..."
     $.ajax({
-        url: "/server/render_resized_images_function/getImageIds",
+        url: "/server/render_resized_images_function/getImageIds?id=" + localStorage['circuitId'] || null,
         type: "get",
         success: function (data) {
+            document.getElementById('right_part').style.visibility = "visible";
+            document.getElementById('left_part').style.visibility = "visible";
             document.getElementById('message').innerHTML = "";
-            if (data.all.length != 0 && data.resized.length != 0) {
-                document.getElementById('sample').src = "Processed.png";
+            if (data.Images.length != 0 && data.ResizedImages.length != 0) {
+                document.getElementById('sample').src = "/baas/v1/project/3296000000550149/folder/3296000000550192/file/" + data.Images[0] + "/download?Environment=Development";
+                document.getElementById('sample').style.width = "100%"
                 var actualImages = document.getElementById('actualImages');
-                for (var i = 0; i < data.all.length; i++) {
-                    if (data.all[i]) {
+                for (var i = 1; i < data.Images.length; i++) {
+                    if (data.Images[i]) {
                         var imageContainer = document.createElement('div');
                         imageContainer.setAttribute("class", "mySlides fade");
                         imageContainer.style.display = 'none';
                         var image = document.createElement('img');
-                        image.src = "/baas/v1/project/3296000000550149/folder/3296000000550192/file/" + data.all[i] + "/download?Environment=Development";
+                        image.src = "/baas/v1/project/3296000000550149/folder/3296000000550192/file/" + data.Images[i] + "/download?Environment=Development";
                         image.style.width = "100%";
                         imageContainer.appendChild(image);
                         actualImages.appendChild(imageContainer);
@@ -48,16 +52,16 @@ function getImages() {
                 a.innerHTML = "&#10095;";
                 actualImages.appendChild(a);
 
-                document.getElementById('samplez').src = "Processed.png";
+                document.getElementById('samplez').src = "/baas/v1/project/3296000000550149/folder/3296000000588147/file/" + data.ResizedImages[0] + "/download?Environment=Development";
+                document.getElementById('sample').style.width = "100%"
                 var resizedImages = document.getElementById('resizedImages');
-                for (var i = 0; i < data.all.length; i++) {
-                    if (data.resized[i]) {
+                for (var i = 1; i < data.ResizedImages.length; i++) {
+                    if (data.ResizedImages[i]) {
                         var imageContainer = document.createElement('div');
                         imageContainer.setAttribute("class", "mySlidez fade");
                         imageContainer.style.display = 'none';
                         var image = document.createElement('img');
-                        image.src = "/baas/v1/project/3296000000550149/folder/3296000000588147/file/" + data.resized[i] + "/download?Environment=Development";
-                        image.style.width = "100%";
+                        image.src = "/baas/v1/project/3296000000550149/folder/3296000000588147/file/" + data.ResizedImages[i] + "/download?Environment=Development";
                         imageContainer.appendChild(image);
                         resizedImages.appendChild(imageContainer);
                     }
