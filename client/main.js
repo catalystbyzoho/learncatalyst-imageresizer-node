@@ -26,7 +26,7 @@ function getImages() {
             document.getElementById('left_part').style.visibility = "visible";
             document.getElementById('message').innerHTML = "";
             if (data.Images.length != 0 && data.ResizedImages.length != 0) {
-                document.getElementById('sample').src = "/baas/v1/project/3296000000550149/folder/3296000000550192/file/" + data.Images[0] + "/download?Environment=Development";
+                document.getElementById('sample').src = "/baas/v1/project/projectId/folder/storeImages_FOLDER_ID/file/" + data.Images[0] + "/download?Environment=Development";
                 document.getElementById('sample').style.width = "100%"
                 var actualImages = document.getElementById('actualImages');
                 for (var i = 1; i < data.Images.length; i++) {
@@ -35,7 +35,7 @@ function getImages() {
                         imageContainer.setAttribute("class", "mySlides fade");
                         imageContainer.style.display = 'none';
                         var image = document.createElement('img');
-                        image.src = "/baas/v1/project/3296000000550149/folder/3296000000550192/file/" + data.Images[i] + "/download?Environment=Development";
+                        image.src = "/baas/v1/project/projectId/folder/storeImages_FOLDER_ID/file/" + data.Images[i] + "/download?Environment=Development";
                         image.style.width = "100%";
                         imageContainer.appendChild(image);
                         actualImages.appendChild(imageContainer);
@@ -52,7 +52,7 @@ function getImages() {
                 a.innerHTML = "&#10095;";
                 actualImages.appendChild(a);
 
-                document.getElementById('samplez').src = "/baas/v1/project/3296000000550149/folder/3296000000588147/file/" + data.ResizedImages[0] + "/download?Environment=Development";
+                document.getElementById('samplez').src = "/baas/v1/project/projectId/folder/resizedImages_FOLDER_ID/file/" + data.ResizedImages[0] + "/download?Environment=Development";
                 document.getElementById('sample').style.width = "100%"
                 var resizedImages = document.getElementById('resizedImages');
                 for (var i = 1; i < data.ResizedImages.length; i++) {
@@ -61,7 +61,7 @@ function getImages() {
                         imageContainer.setAttribute("class", "mySlidez fade");
                         imageContainer.style.display = 'none';
                         var image = document.createElement('img');
-                        image.src = "/baas/v1/project/3296000000550149/folder/3296000000588147/file/" + data.ResizedImages[i] + "/download?Environment=Development";
+                        image.src = "/baas/v1/project/projectId/folder/resizedImages_FOLDER_ID/file/" + data.ResizedImages[i] + "/download?Environment=Development";
                         imageContainer.appendChild(image);
                         resizedImages.appendChild(imageContainer);
                     }

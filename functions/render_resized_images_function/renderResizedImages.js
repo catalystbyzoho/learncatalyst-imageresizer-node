@@ -3,9 +3,9 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const catalyst = require('zcatalyst-sdk-node');
-const CIRCUITID = 3296000000550278;
-const FOLDERID = [3296000000550192, 3296000000588147];
-const FOLDERNAME = { 3296000000550192: "Images", 3296000000588147: "ResizedImages" };
+const CIRCUITID = CIRCUITID;
+const FOLDERID = [resizedImages_FOLDER_ID, storeImages_FOLDER_ID];
+const FOLDERNAME = { resizedImages_FOLDER_ID: "Images", resizedImages_FOLDER_ID: "ResizedImages" };
 
 app.post('/triggerCircuit', async (req, res) => {
     try {
